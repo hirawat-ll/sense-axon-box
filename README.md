@@ -11,8 +11,9 @@ same end grilles — and two things are added for the RK3588:
 
 - a **ventilation ring**: 33 slots cut into both long walls, so the tray
   breathes on all four sides instead of only through the two ends;
-- a **25 mm fan seat** in the tray floor, with the intake cutout through the
-  floor, for the active cooler that sits under the board.
+- a **25 mm fan seat** cut into the tray floor, for the active cooler that
+  sits under the board: a 25.7 mm bore through the 3.0 mm floor with a lead-in
+  and a Ø22 ledge the fan frame rests on.
 
 Everything is parametric OpenSCAD; the part is a single self-contained file
 plus a print-ready STL.
@@ -26,9 +27,14 @@ plus a print-ready STL.
 - **360° venting** — the tray goes from 526 mm² to 1014 mm² of free area, now on
   all four sides: the flow path is floor intake → fan → heatsink → out through
   the wall slots, at the same height as the cooler.
-- **Fan seat in the floor** — a Ø22 mm intake cutout through the 3.0 mm floor
-  plus a 3.5 mm high ring that locates a 25 × 25 mm fan, concentric with the
-  RK3588, so the fan and heatsink stay aligned with the chip.
+- **Fan seat in the floor** — a 25.7 mm rounded-square bore through the 3.0 mm
+  floor, a 0.5 mm lead-in at its mouth and a Ø22 mm bore that leaves a 0.5 mm
+  ledge for the fan frame to rest on. Concentric with the RK3588, so the fan
+  and heatsink stay aligned with the chip. The seat is **cut, never added**:
+  nothing protrudes into the tray, and the export stays clean.
+- **Nothing to foul** — the whole seat lives inside the floor's thickness, so
+  the heatsink gets ~7.7 mm of room under the board instead of ~5 mm, and no
+  part of the print can press on a heatsink that overhangs the fan.
 - **Support-free print** — the slots end in ~59° bevels with a 0.8 mm flat cap,
   so the widest unsupported span is 0.8 mm; the fan ring is a vertical wall on
   a flat floor. Nothing to support, nothing to bridge, in the orientation shown.
@@ -50,7 +56,7 @@ plus a print-ready STL.
 | --- | --- | --- |
 | long walls | solid | 33 slots, 2.0 × 6.9 mm, 4.0 mm pitch, band z = −14.5 … −7.6 |
 | free vent area | 526 mm² (ends only) | **1014 mm²** (all four sides) |
-| tray floor | solid 3.0 mm plate | **Ø22 mm intake + 3.5 mm fan seat** at the RK3588 |
+| tray floor | solid 3.0 mm plate | **25.7 mm fan bore + Ø22 ledge**, flush, at the RK3588 |
 | mesh | 16 284 facets, 48 852 loose vertices, 2 junk patches, 63 non-manifold edges | 6 000 facets, welded, junk-free, manifold export |
 
 The fan pocket is placed from Vicharak's own data rather than from a photo: the
@@ -72,12 +78,16 @@ centre, on the board's under-face. Hence `fan_center = [-0.75, -0.50]`.
 
 Vertical budget, measured from the case: the board's under-face sits at
 z ≈ −4 (the +Y wall's cable opening tops out there) and the RK3588 hangs 1.9 mm
-below it, so there is **≈ 8.7 mm between the chip and the floor** for the
-heatsink plus the fan. A 3.5 mm fan leaves ~5 mm for the heatsink, and the seat's
-rim then ends flush with the fan's top face, so it cannot foul a wider heatsink.
+below it. The fan sits in the floor, so the heatsink gets the space from the
+chip's underside down to the fan's top face: **≈ 7.7 mm** with a 3.5 mm fan.
 
 Hardware: 25 × 25 × 3.5 mm fan, 4 × M2.5 × 12 mm self-tapping screws for the
 board (as in Vicharak's assembly guide).
+
+If you would rather have the seat raised above the floor, set
+`fan_seat_raised = true`: that gives the 3.5 mm ring from the first revision,
+at the cost of ~3 mm of heatsink room and of 272 buried duplicate facets that
+the union leaves in the export.
 
 ## Files
 
