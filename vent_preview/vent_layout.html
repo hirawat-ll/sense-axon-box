@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ventilation ring — wall elevations</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font-family: var(--font-sans, system-ui, sans-serif); color: var(--foreground, #111); font-size: 13px; line-height: 1.45; }
+  .wall { display: block; width: 100%; height: auto; margin: 2px 0 9px; }
+  .cap { color: var(--muted-foreground, #666); font-size: 12px; margin: 0 0 1px; }
+  .cap b { color: var(--foreground, #111); font-weight: 600; }
+  .new { color: var(--primary, #2563eb); font-weight: 600; }
+  .row { margin-bottom: 6px; }
+  .mat  { fill: var(--muted, #eee); stroke: var(--border, #ccc); stroke-width: .35; }
+  .boss { fill: none; stroke: var(--muted-foreground, #888); stroke-width: .3; stroke-dasharray: 1 .8; opacity: .75; }
+  .open { fill: var(--muted-foreground, #888); opacity: .16; }
+  .lbl  { fill: var(--muted-foreground, #777); font-size: 3.1px; }
+  table { border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+  th, td { border-bottom: 1px solid var(--border, #ddd); padding: 3px 10px 3px 0; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--muted-foreground, #666); font-weight: 500; }
+  tr.tot td { font-weight: 700; border-top: 1px solid var(--border, #ddd); }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 2px 0 14px; font-size: 12px; color: var(--muted-foreground, #666); }
+  .legend i { display: inline-block; width: 11px; height: 11px; margin-right: 5px; vertical-align: -1px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<p style="margin:0 0 10px"><b>Ventilation ring — the four walls of the tray, unrolled flat</b><br>
+Same z scale on every elevation; drawn down to the inner floor (z = −14.6).</p>
+
+<div class="legend">
+  <span><i style="background:var(--muted,#eee);border:1px solid var(--border,#ccc)"></i>wall material</span>
+  <span><i style="background:var(--muted-foreground,#888);opacity:.55"></i>existing slat grille (both ends, unchanged)</span>
+  <span><i style="background:var(--primary,#2563eb)"></i>new slots (long walls)</span>
+</div>
+
+<div class="row">
+  <p class="cap"><b>+Y long wall</b> (back) · outer skin 2.9 mm thick · <span class="new">new: 3 + 9 slots through the skin, 7 through the recessed panel</span></p>
+  <svg class="wall" viewBox="0 0 110.7 21" role="img">
+    <defs>
+      <pattern id="a1" width="4" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(45.5,0)">
+        <rect x="0" y="0" width="2" height="6.9" fill="var(--primary,#2563eb)"/></pattern>
+      <pattern id="a2" width="4" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(94.5,0)">
+        <rect x="0" y="0" width="2" height="6.9" fill="var(--primary,#2563eb)"/></pattern>
+      <pattern id="a3" width="4" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(63.5,0)">
+        <rect x="0" y="0" width="2" height="6.9" fill="var(--primary,#2563eb)"/></pattern>
+    </defs>
+    <rect class="mat" x="2" y="1.8" width="106.71" height="16.6" rx=".8"/>
+    <rect class="open" x="26.95" y="1.8" width="30" height="16.6"/>
+    <rect class="boss" x="25.95" y="1.8" width="1" height="16.6"/>
+    <rect class="boss" x="58.95" y="1.8" width="1" height="16.6"/>
+    <rect class="mat" x="25.95" y="4.2" width="34" height="12.3" rx=".5" style="fill:var(--card,#fff)"/>
+    <rect class="boss" x="25.95" y="4.2" width="34" height="12.3" rx=".5" style="stroke-dasharray:1.6 1.2"/>
+    <rect x="10.45" y="9.9" width="10" height="6.9" fill="url(#a1)"/>
+    <rect x="59.45" y="9.9" width="34" height="6.9" fill="url(#a2)"/>
+    <rect x="28.45" y="9.9" width="26" height="6.9" fill="url(#a3)"/>
+    <text class="lbl" x="18" y="20.4">skin slots</text>
+    <text class="lbl" x="66" y="20.4">skin slots</text>
+    <text class="lbl" x="60" y="13.6">panel slots (6 mm deep)</text>
+  </svg>
+</div>
+
+<div class="row">
+  <p class="cap"><b>−Y long wall</b> (front) · 1.8 mm thick · <span class="new">new: 3 + 11 slots</span></p>
+  <svg class="wall" viewBox="0 0 110.7 21" role="img">
+    <defs>
+      <pattern id="b1" width="4" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(12.45,0)">
+        <rect x="0" y="0" width="2" height="6.9" fill="var(--primary,#2563eb)"/></pattern>
+      <pattern id="b2" width="4" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(39.95,0)">
+        <rect x="0" y="0" width="2" height="6.9" fill="var(--primary,#2563eb)"/></pattern>
+    </defs>
+    <rect class="mat" x="2" y="1.8" width="106.71" height="16.6" rx=".8"/>
+    <rect class="boss" x="25.95" y="1.8" width="12" height="16.6"/>
+    <rect class="boss" x="85.95" y="1.8" width="9" height="16.6"/>
+    <rect x="10.45" y="9.9" width="10" height="6.9" fill="url(#b1)"/>
+    <rect x="37.95" y="9.9" width="42" height="6.9" fill="url(#b2)"/>
+    <text class="lbl" x="16" y="20.4">3 slots</text>
+    <text class="lbl" x="48" y="20.4">11 slots</text>
+    <text class="lbl" x="28" y="5.6">cooler boss</text>
+    <text class="lbl" x="86" y="5.6">boss</text>
+  </svg>
+</div>
+
+<div class="row">
+  <p class="cap"><b>+X end</b> (right) · existing slat grille, unchanged</p>
+  <svg class="wall" viewBox="0 0 88.76 21" role="img">
+    <defs>
+      <pattern id="c1" width="2.5" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(8.9,0)">
+        <rect x="0" y="0" width="1" height="6.9" fill="var(--muted-foreground,#888)" opacity=".55"/></pattern>
+      <pattern id="c2" width="2.5" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(39.9,0)">
+        <rect x="0" y="0" width="1" height="6.9" fill="var(--muted-foreground,#888)" opacity=".55"/></pattern>
+    </defs>
+    <rect class="mat" x="2" y="0" width="82.76" height="18.5" rx=".8"/>
+    <rect x="8.9" y="9.9" width="15" height="6.9" fill="url(#c1)"/>
+    <rect x="39.9" y="9.9" width="37" height="6.9" fill="url(#c2)"/>
+    <rect class="open" x="23.9" y="9.9" width="16" height="6.9"/>
+    <text class="lbl" x="24" y="20.4">existing louvre window (no slots at the outer skin)</text>
+  </svg>
+</div>
+
+<div class="row">
+  <p class="cap"><b>−X end</b> (left) · existing slat grille, unchanged</p>
+  <svg class="wall" viewBox="0 0 88.76 21" role="img">
+    <defs>
+      <pattern id="d1" width="2.5" height="8" patternUnits="userSpaceOnUse" patternTransform="translate(8.9,0)">
+        <rect x="0" y="0" width="1" height="6.9" fill="var(--muted-foreground,#888)" opacity=".55"/></pattern>
+    </defs>
+    <rect class="mat" x="2" y="0" width="82.76" height="18.5" rx=".8"/>
+    <rect x="8.9" y="9.9" width="68" height="6.9" fill="url(#d1)"/>
+    <text class="lbl" x="30" y="20.4">continuous slat grille, y = −34 … 34</text>
+  </svg>
+</div>
+
+<table>
+  <thead><tr><th>opening</th><th>before</th><th>after</th></tr></thead>
+  <tbody>
+    <tr><td>+X end grille (existing)</td><td>268 mm²</td><td>268 mm²</td></tr>
+    <tr><td>−X end grille (existing)</td><td>258 mm²</td><td>258 mm²</td></tr>
+    <tr><td>−Y long wall — 14 slots</td><td>0</td><td>189 mm²</td></tr>
+    <tr><td>+Y long wall skin — 12 slots</td><td>0</td><td>192 mm²</td></tr>
+    <tr><td>+Y recessed panel — 7 slots</td><td>0</td><td>107 mm²</td></tr>
+    <tr class="tot"><td>total free area</td><td>526 mm²</td><td>1014 mm²</td></tr>
+  </tbody>
+</table>
+
+<p class="cap" style="margin-top:10px"><b>Print check</b> — part printed as drawn (floor on the bed), measured on the exported STL:</p>
+<table>
+  <thead><tr><th>mesh / printability</th><th>as supplied</th><th>with the ring</th></tr></thead>
+  <tbody>
+    <tr><td>triangles</td><td>16 284</td><td>8 278</td></tr>
+    <tr><td>degenerate facets (edge &lt; 0.02 mm)</td><td>142</td><td>2</td></tr>
+    <tr><td>open edges (holes)</td><td>0</td><td>0</td></tr>
+    <tr><td>non-manifold edges</td><td>63</td><td>2</td></tr>
+    <tr><td>zero-volume junk patches</td><td>2</td><td>0</td></tr>
+    <tr><td>surface on the bed</td><td>7 979 mm²</td><td>7 979 mm²</td></tr>
+    <tr><td>surface to bridge (span ≤ 4 mm)</td><td>274 mm²</td><td>333 mm²</td></tr>
+    <tr><td>surface needing support</td><td>201 mm²</td><td>203 mm²</td></tr>
+    <tr class="tot"><td>widest unsupported span of the new slots</td><td>—</td><td>0.8 mm</td></tr>
+  </tbody>
+</table>
+
+<p class="cap" style="margin-top:8px">Slot geometry: 2.0 mm wide, 7.1 mm tall, 4.0 mm pitch, band z = −14.7 … −7.6. Profile for FDM: straight sides, ~59° bevelled ends and a 0.8 mm flat cap (<i>vent_corner</i> / <i>vent_bevel</i>) — no support, no bridging. Areas measured on the exported STL by ray casting; both end grilles untouched.</p>
+
+</body>
+</html>
