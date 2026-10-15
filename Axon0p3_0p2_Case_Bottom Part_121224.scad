@@ -1832,10 +1832,99 @@ module long_wall_vents() {
     for (r = posY_rows) slot_row_y(r[0], r[1], posY_in, posY_out);
 }
 
+
+// =====================================================================
+//  FAN SECTION -- 25 x 25 mm fan holder in the tray floor
+//
+//  The board goes into the tray component-side DOWN, so the RK3588, its
+//  heatsink and the fan sit in the layer between the board and the floor.
+//  The fan draws air from outside through the cutout in the floor and
+//  blows it up through the heatsink; the hot air leaves through the slot
+//  grille in the walls (VENT SECTION below), which sits at exactly this
+//  level (z = -14.5 ... -7.6).
+//
+//  Geometry: a circular cutout through the 3.0 mm floor for the intake,
+//  plus a support ring 3.5 mm high around the fan frame that locates it
+//  (set fan_seat = false for the cutout on its own).
+//
+//  SCOPE: this is the only change to the case.  The board's screw bosses,
+//  the rim, the lid seat, the corner posts and both end grilles are the
+//  same geometry as the case that already fits - a material map of the
+//  exported part differs from the previous build in nothing outside the
+//  36 x 36 mm fan footprint, and the ring tops out at z = -11.1, well
+//  clear of the board's under-face at z ~ -4.
+//
+//  Position, measured from Vicharak's own data rather than guessed:
+//    * the four M2.5 bosses in the floor sit on a 95.5 x 69.0 mm rectangle
+//      centred on the tray (measured from this mesh);
+//    * the Axon PCB is 101.50 x 75.00 mm with its M2.5 holes 3.0 mm in
+//      from every edge (AXON_3D_file_V0.3.step + the documentation), so the
+//      board is centred on the screw rectangle;
+//    * in that STEP the RK3588 body is 23.00 x 23.00 x 1.89 mm and its
+//      centre sits at (-0.75, -0.50) mm from the PCB's centre, on the
+//      board's under-face - the face that points at this floor.
+//  Hence fan_center = [-0.75, -0.50]: +x toward the +X end wall (the end
+//  with the fine grille), +y toward the +Y long wall (the side with the
+//  recessed panel).  Checked against the case: with that orientation the
+//  22-pin PCIe/SATA FPC on the board's under-face lines up with the
+//  30 x 11 mm opening in the +Y wall.  If your board goes in the other way
+//  round (180 deg), use [+0.75, +0.50] instead.
+// =====================================================================
+
+fan_seat      = true;   // true  = Ø22 cutout + the 3.5 mm support ring
+                        // false = Ø22 cutout only, no ring
+fan_size      = 25.0;   // fan frame, square
+fan_clearance = 0.35;   // printed pocket = fan_size + 2*clearance
+fan_wall      = 1.80;   // support ring wall (4-5 extrusion lines @0.4 mm)
+fan_support_h = 3.5;    // support height above the floor, as specified
+fan_corner_r  = 3.0;    // inner corner radius (fits a 25 mm fan frame)
+fan_taper     = 0.20;   // per side, widens the pocket toward the top (lead-in)
+fan_hole_d    = 22.0;   // floor cutout; a 25 mm fan has a ~23 mm bore, so a
+                        // 0.5 mm ledge of the frame still rests on the floor
+fan_center    = [-0.75, -0.50];  // RK3588 centre, measured from the
+                        // Vicharak board STEP (see note above)
+
+floor_top_z   = -14.6;  // inner floor surface (measured from the mesh)
+floor_bot_z   = -17.6;  // outer floor surface -> floor is 3.0 mm thick
+
+// rounded square, centred on the origin
+module rr_square(sz, r) {
+    hull() for (ix = [-1, 1], iy = [-1, 1])
+        translate([ix * (sz / 2 - r), iy * (sz / 2 - r)]) circle(r = r, $fn = 64);
+}
+
+// the support ring: straight outside, tapered inside (self-releasing, no
+// overhang: the inner face leans out by fan_taper over fan_support_h)
+module fan_ring() {
+    d = fan_size + 2 * fan_clearance;
+    difference() {
+        linear_extrude(fan_support_h) rr_square(d + 2 * fan_wall, fan_corner_r + fan_wall);
+        translate([0, 0, -0.1])
+            linear_extrude(fan_support_h + 0.2, scale = (d + 2 * fan_taper) / d)
+                rr_square(d, fan_corner_r);
+    }
+}
+
+module fan_holder() {
+    if (fan_seat) translate([fan_center[0], fan_center[1], floor_top_z]) fan_ring();
+}
+
+module fan_cutout() {
+    // intake hole through the floor
+    translate([fan_center[0], fan_center[1], floor_bot_z - 0.5])
+        cylinder(d = fan_hole_d, h = (floor_top_z - floor_bot_z) + 1.0, $fn = 128);
+}
+
 // ---------------------------------------------------------------- result
 // case_bottom();  alone gives the untouched mesh, for comparison.
 difference() {
-    case_bottom();
-    long_wall_vents();
+    union() {
+        difference() {
+            case_bottom();
+            long_wall_vents();
+        }
+        fan_holder();
+    }
+    fan_cutout();
 }
 
