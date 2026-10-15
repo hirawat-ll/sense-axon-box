@@ -1,3 +1,31 @@
+# Python bytecode and caches — tools/check.py is the only Python here.
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments, if you run the checks in one.
+.venv/
+venv/
+
+# macOS
 .DS_Store
+._*
+.AppleDouble
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# OpenSCAD / slicer scratch output (the committed STLs are intentional).
+*.csg
+*.gcode
+*.3mf
+*.bgcode
+
+# Note: the .stl, .step, .png and .html files in this repository are part of
+# the deliverable. Do not add *.stl, *.step or image patterns here.
